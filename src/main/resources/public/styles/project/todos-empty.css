@@ -1,0 +1,10 @@
+.__empty .todos-list,
+.__empty .todos-actionbar
+{
+    display: none;
+}
+
+.__empty:before,
+.__empty:after{
+    display: none;
+}

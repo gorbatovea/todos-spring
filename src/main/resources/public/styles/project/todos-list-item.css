@@ -1,0 +1,123 @@
+.todos-list-item,
+.todos-list-item __ready{
+    height: auto;
+    border-top: 1px solid rgb(230,230,230);
+    display: flex;
+
+}
+
+.todos-list-item_check-w{
+    float: left;
+    display: flex;
+    height: 64px;
+    width: 64px;
+    position: relative;
+}
+
+.todos-list-item_check,
+.todos-list-item_check-ready{
+    opacity: 0;
+    position: absolute;
+    border: 0;
+    padding: 0;
+    margin-left: 0;
+    margin-top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.todos-list-item_check-icon,
+.todos-list-item_check-ready_icon{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -20px;
+    margin-left: -20px;
+    z-index: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    vertical-align: middle;
+    border: 1px solid rgb(235,235,235);
+    background: #ffffff;
+    -webkit-appearance: none;
+}
+
+
+.todos-list-item_check:checked ~ .todos-list-item_check-icon,
+.todos-list-item_check-ready:checked ~ .todos-list-item_check-ready_icon{
+    background: url(../../img/icons/completed.png) 0 no-repeat;
+    background-position: center;
+    border: 1px solid rgb(150,215,203);
+}
+
+.todos-list-item_name,
+.todos-list-item_name-ready{
+    width: 100%;
+    display: flex;
+
+    position: relative ;
+    height: 64px;
+    padding: 17px 0px;
+    background: none;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    color: rgb(102,102,102);
+    font-size: 24px;
+    line-height: 30px;
+    font-weight: 100;
+    cursor: pointer;
+    resize: none;
+}
+
+.__ready, .todos-list-item_name-ready{
+    text-decoration: line-through;
+    color: rgb(221,221,221);
+}
+
+.todos-list-item_delete-w{
+    right:0%;
+    float: right;
+    height: 64px;
+    width: 44px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    opacity: 0;
+    }
+
+.todos-list-item_delete{
+    height: 64px;
+    width: 44px;
+    position: relative;
+    float: right;
+    background: url("../../img/icons/close.png") 0 no-repeat;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+}
+
+.todos-list-item_check-w:hover ~ .todos-list-item_delete-w{
+    opacity: 1;
+}
+
+.todos-list-item_name-ready:hover + .todos-list-item_delete-w{
+    opacity: 1;
+}
+
+.todos-list-item_name:hover + .todos-list-item_delete-w{
+    opacity: 1;
+}
+
+.todos-list-item_delete-w:hover{
+    opacity: 1;
+}
+
+.todos-list-item:hover{
+    background-color: rgb(250,250,250);
+    cursor: pointer;
+}
