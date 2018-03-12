@@ -1,102 +1,61 @@
 .todos-actionbar{
-    display: flex;
-    height: 40px;
-    border-top: 1px solid rgb(230,230,230);
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
+    min-height: 40px;
+    display: block;
+    text-align: center;
+    padding: 4px 12px;
+    /*border-top: 1px solid rgb(230,230,230);*/
 }
+
 
 .todos-actionbar_counter{
-    position: relative;
-    display: block;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 200;
+    padding: 2px 0;
     float: left;
+    margin: 8px 16px 8px 0;
     color: rgb(136,136,136);
-    padding: 1px 0px 1px 0px;
-    top: 50%;
-    margin-top: -8px;
-    margin-left: 12px;
-}
-
-.todos-actionbar_filter{
-    position: relative;
-    display: flex;
-    height: auto;
-    width: 200px;
-    top: 50%;
-    margin: 0 auto;
-    margin-top: -10px;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-}
-
-.todos-actionbar_filter-all{
-    display: flex;
-    float: left;
-    background: none;
-    border: 1px solid #fff;
-    border-radius: 10%;
-    color: rgb(136,136,136);
-    cursor: pointer;
-}
-
-.todos-actionbar_filter-active{
-    display: flex;
-    background: none;
-    border: 1px solid #fff;
-    border-radius: 10%;
-    color: rgb(136,136,136);
-    horiz-align: center;
-    cursor: pointer;
-}
-
-.todos-actionbar_filter-ready{
-    display: flex;
-    float: right;
-    background: none;
-    border: 1px solid #fff;
-    border-radius: 10%;
-    color: rgb(136,136,136);
-    cursor: pointer;
-}
-
-.todos-actionbar_filter-all:focus{
-    border: 1px solid rgb(235,223,223);
-}
-
-.todos-actionbar_filter-active:focus{
-    border: 1px solid rgb(235,223,223);
-}
-
-.todos-actionbar_filter-ready:focus{
-    border: 1px solid rgb(235,223,223);
 }
 
 .todos-actionbar_delete-ready{
-    position: relative;
-    display: flex;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 200;
+    margin: 8px 0 8px 16px;
+    padding: 2px 0;
     float: right;
+    color: rgb(136,136,136);
+    cursor: pointer;
     background: none;
     border: 1px solid #fff;
-    border-radius: 10%;
+}
+
+.todos-actionbar_filter{
+    white-space: nowrap;
+    display: inline-block;
+    text-align: center;
+    margin: 8px 0;
+
+}
+
+.todos-actionbar_filter .filter{
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 14px;
+    line-height: 18px;
+    background: none;
+    outline: none;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 200;
+    border: 0;
+    box-sizing: border-box;
     color: rgb(136,136,136);
-    padding: 1px 0px 1px 0px;
-    top: 50%;
-    margin-top: -10px;
-    margin-right: 12px;
     cursor: pointer;
 }
 
-
-.__active{
-	border: 1px solid rgb(235,223,223);
-}
-
-.__one-element .todos-actionbar_counter{
-    visibility: hidden;
-}
-
-.__one-element .todos-actionbar_delete-ready{
-    visibility: hidden;
+.todos-actionbar_filter .__active{
+    border: 1px solid rgb(235,223,223);
+    border-radius: 5px;
 }

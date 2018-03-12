@@ -1,6 +1,5 @@
-.todos-list-item,
-.todos-list-item __ready{
-    height: auto;
+.todos-list-item{
+    height: 64px;
     border-top: 1px solid rgb(230,230,230);
     display: flex;
 
@@ -14,8 +13,7 @@
     position: relative;
 }
 
-.todos-list-item_check,
-.todos-list-item_check-ready{
+.todos-list-item_check{
     opacity: 0;
     position: absolute;
     border: 0;
@@ -28,8 +26,7 @@
     cursor: pointer;
 }
 
-.todos-list-item_check-icon,
-.todos-list-item_check-ready_icon{
+.todos-list-item_check-icon{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -46,18 +43,16 @@
 }
 
 
-.todos-list-item_check:checked ~ .todos-list-item_check-icon,
-.todos-list-item_check-ready:checked ~ .todos-list-item_check-ready_icon{
-    background: url(../../img/icons/completed.png) 0 no-repeat;
+.todos-list-item_check:checked ~ .todos-list-item_check-icon{
+    background: url(../../img/completed.png) 0 no-repeat;
     background-position: center;
     border: 1px solid rgb(150,215,203);
 }
 
-.todos-list-item_name,
-.todos-list-item_name-ready{
+
+.todos-list-item_name{
     width: 100%;
     display: flex;
-
     position: relative ;
     height: 64px;
     padding: 17px 0px;
@@ -73,13 +68,7 @@
     resize: none;
 }
 
-.__ready, .todos-list-item_name-ready{
-    text-decoration: line-through;
-    color: rgb(221,221,221);
-}
-
 .todos-list-item_delete-w{
-    right:0%;
     float: right;
     height: 64px;
     width: 44px;
@@ -88,24 +77,28 @@
     justify-content: flex-start;
     align-items: flex-start;
     opacity: 0;
-    }
+}
 
 .todos-list-item_delete{
     height: 64px;
     width: 44px;
     position: relative;
     float: right;
-    background: url("../../img/icons/close.png") 0 no-repeat;
+    background: url("../../img/close.png") 0 no-repeat;
     background-position: center;
     border: none;
     cursor: pointer;
+}
+
+.todos-list-item_delete:last-child{
+    border: none;
 }
 
 .todos-list-item_check-w:hover ~ .todos-list-item_delete-w{
     opacity: 1;
 }
 
-.todos-list-item_name-ready:hover + .todos-list-item_delete-w{
+.todos-list-item_name:hover + .todos-list-item_delete-w{
     opacity: 1;
 }
 
