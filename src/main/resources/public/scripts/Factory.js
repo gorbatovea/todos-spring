@@ -50,27 +50,26 @@ function todoFactory(dist, id, value, done) {
     todo.getElementsByClassName('todos-list-item_check')[0]
         .addEventListener('click', function (clickEvent) {
             var item = clickEvent.target.closest('.todos-list-item');
+            if (clickEvent.target.checked === true){
+                if (!item.classList.contains('__ready')) {
+                    item.classList.add('__ready');
+                    item.children[1].style.textDecoration = 'line-through';
+                    item.children[1].style.opacity = '0.5';
+                }
+            } else {
+                if (item.classList.contains('__ready')) {
+                    item.classList.remove('__ready');
+                    item.children[1].style.textDecoration = 'none';
+                    item.children[1].style.opacity = '1';
+                }
+            }
+            filtrate();
             request('POST', API_SELECT,
                 function (response) {
                     if (response === '') {
                         console.error('Response is empty');
                         return;
                     }
-                    var item = document.getElementById(response.id);
-                    if (response.done === true){
-                        if (!item.classList.contains('__ready')) {
-                            item.classList.add('__ready');
-                            item.children[1].style.textDecoration = 'line-through';
-                            item.children[1].style.opacity = '0.5';
-                        }
-                    } else {
-                        if (item.classList.contains('__ready')) {
-                            item.classList.remove('__ready');
-                            item.children[1].style.textDecoration = 'none';
-                            item.children[1].style.opacity = '1';
-                        }
-                    }
-                    filtrate();
                 }, TIMEOUT, JSON.stringify({
                     id: item.getAttribute('id'),
                     task: null,
@@ -88,14 +87,14 @@ function todoFactory(dist, id, value, done) {
     todo.getElementsByClassName('todos-list-item_delete')[0]
         .addEventListener('click', function (clickEvent) {
             var parent = clickEvent.target.closest('.todos-list-item');
+            dist.removeChild(parent);
+            updateCounter(-1);
             request('POST', API_DELETE,
                 function (response) {
                     if (response === '') {
                         console.error('Response is empty');
                         return;
                     }
-                    dist.removeChild(document.getElementById(response.id));
-                    updateCounter(-1);
                 }, TIMEOUT, JSON.stringify({
                     id: parent.getAttribute('id'),
                     task: null,

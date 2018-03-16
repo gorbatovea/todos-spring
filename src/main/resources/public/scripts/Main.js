@@ -12,14 +12,15 @@ document.addEventListener('DOMContentLoaded', function () {
         function (clickEvent) {
             var items = todoList.children;
             for(var i = 0; i < items.length; i++) {
+                items[i].classList.add('__ready');
+                items[i].getElementsByClassName('todos-list-item_check')[0].checked=true;
+                items[i].getElementsByClassName('todos-list-item_name')[0].style.textDecoration = 'line-through';
+                items[i].getElementsByClassName('todos-list-item_name')[0].style.opacity = '0.5';
                 request('POST', API_SELECT,
                 function (response) {
-                    if ((response !== null)) {
-                        var item = document.getElementById(response.id);
-                        item.classList.add('__ready');
-                        item.getElementsByClassName('todos-list-item_check')[0].checked=true;
-                        item.getElementsByClassName('todos-list-item_name')[0].style.textDecoration = 'line-through';
-                        item.getElementsByClassName('todos-list-item_name')[0].style.opacity = '0.5';
+                    if ((response === null)) {
+                        console.error('Response is empty');
+                        return;
                     }
                 }, TIMEOUT, JSON.stringify({
                         id: items[i].getAttribute('id'),
@@ -84,19 +85,26 @@ document.addEventListener('DOMContentLoaded', function () {
     //listener for 'delete' button
     document.getElementsByClassName('todos-actionbar_delete-ready')[0].addEventListener('click',
         function (clickEvent) {
-        for(var i = 0; i < todoList.children.length; i++) {
-            if (todoList.children[i].getAttribute('class') === 'todos-list-item __ready') {
+        var i = 0;
+        while(true){
+            var item = todoList.children[i];
+            if (item === undefined) break;
+            if (item.getAttribute('class') === 'todos-list-item __ready') {
                 request('POST', API_DELETE,
                     function (response) {
-                        if (response !== '') {
-                            todoList.removeChild(document.getElementById(response.id));
-                            updateCounter(-1);
+                        if (response === '') {
+                            console.error('Response is empty');
+                            return;
                         }
                     }, TIMEOUT, JSON.stringify({
-                        id: todoList.children[i].getAttribute('id'),
+                        id: item.getAttribute('id'),
                         task: null,
                         done: null
                     }));
+                todoList.removeChild(todoList.children[i]);
+                updateCounter(-1);
+            } else {
+                i++;
             }
         }
     });
