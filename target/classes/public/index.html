@@ -7,11 +7,7 @@
 
         <title>TODOS</title>
 
-        <link rel="stylesheet" href="./styles/default.css">
-
-        <!--<script type="text/javascript" src="scripts/model.js"></script>-->
-
-        <!--<script type="text/javascript" src="scripts/view.js"></script>&ndash;&gt;-->
+        <link rel="stylesheet" href="styles/default.css">
 
     </head>
     
@@ -24,7 +20,7 @@
 
             </div>
 
-            <div class="todos-container">
+            <div class="todos-container __empty">
 
                     <div class="todos-add">
 
@@ -36,7 +32,7 @@
 
                         <div class="todo-add_put-item-w">
 
-                            <input type="text" class="todo-add_put-item" placeholder="What needs to be done?" aria-label="add new item"/>
+                            <input class="todo-add_put-item" type="text" placeholder="What needs to be done?" aria-label="add new item"/>
 
                         </div>
 
@@ -52,9 +48,11 @@
 
                     <div class="todos-actionbar_filter">
 
-                    <button class="filter __active" aria-label="show all todos">All</button>
-                    <button class="filter" aria-label="show active todos">Active</button>
-                    <button class="filter" aria-label="show ready todos">Completed</button>
+                        <button class="filter __active" aria-label="show all todos">All</button>
+
+                        <button class="filter" aria-label="show active todos">Active</button>
+
+                        <button class="filter" aria-label="show ready todos">Completed</button>
 
                     </div>
 
@@ -65,9 +63,17 @@
             </div>
         </div>
 
-        <script src="scripts/addInit.js"></script>
-        <script src="scripts/itemInit.js"></script>
-        <script src="scripts/main.js"></script>
+        <script src="scripts/Context.js"></script>
+
+        <script src="scripts/Request.js"></script>
+
+        <script src="scripts/Factory.js"></script>
+
+        <script src="scripts/Counter.js"></script>
+
+        <script src="scripts/Filters.js"></script>
+
+        <script src="scripts/Main.js"></script>
 
     </body>
 
