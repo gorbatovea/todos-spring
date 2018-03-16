@@ -16,26 +16,24 @@ public class TodosController {
         return todoService.getAll();
     }
 
-    @RequestMapping(value = "/add", params = {"task"})
-    public @ResponseBody Todo addTodo(@RequestParam(value = "task") String task){
-        return todoService.addItem(task);
+    @RequestMapping(method = RequestMethod.POST, value = "/add")
+    public @ResponseBody Todo addTodo(@RequestBody String body){
+        return todoService.addItem(body);
     }
 
-    @RequestMapping(value = "/delete", params = {"id"})
-    public @ResponseBody Todo deleteTodo(@RequestParam(value = "id") String id){
-        return todoService.deleteItem(id);
+    @RequestMapping(method = RequestMethod.POST, value = "/delete")
+    public @ResponseBody Todo deleteTodo(@RequestBody String body){
+        return todoService.deleteItem(body);
     }
 
-    @RequestMapping(value = "/update", params = {"id", "task"})
-    public @ResponseBody boolean updateTodo(@RequestParam(value = "id") String id,
-                                             @RequestParam(value = "task") String task){
-        return todoService.updateTask(id, task);
+    @RequestMapping(method = RequestMethod.POST, value = "/update")
+    public @ResponseBody boolean updateTodo(@RequestBody String body){
+        return todoService.updateTask(body);
     }
 
-    @RequestMapping(value = "/select", params = {"id", "done"})
-    public @ResponseBody Todo revert(@RequestParam(value = "id") String id,
-                                         @RequestParam(value = "done") boolean done){
-        return todoService.updateSelection(id, done);
+    @RequestMapping(method = RequestMethod.POST, value = "/select")
+    public @ResponseBody Todo revert(@RequestBody String body){
+        return todoService.updateSelection(body);
     }
 
     @RequestMapping(value = "/dropAll")

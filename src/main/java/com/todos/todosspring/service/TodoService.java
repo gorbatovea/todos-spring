@@ -1,5 +1,6 @@
 package com.todos.todosspring.service;
 
+import com.google.gson.Gson;
 import com.todos.todosspring.model.Todo;
 import com.todos.todosspring.model.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,19 +18,21 @@ public class TodoService {
         return todoRepository.findAll();
     }
 
-    public Todo addItem(String name) {
-        Todo item = new Todo(name, false);
+    public Todo addItem(String body) {
+        Todo obj = new Gson().fromJson(body, Todo.class);
+        Todo item = new Todo(obj.getTask(), false);
         todoRepository.save(item);
         if (todoRepository.existsById((Integer)item.getId())) return item;
         return null;
     }
 
-    public Todo deleteItem (String id) {
-        Optional<Todo> optionalItem = todoRepository.findById(Integer.parseInt(id));
+    public Todo deleteItem (String body) {
+        Todo obj = new Gson().fromJson(body, Todo.class);
+        Optional<Todo> optionalItem = todoRepository.findById(obj.getId());
         if (optionalItem.isPresent()) {
             Todo item = optionalItem.get();
             todoRepository.delete(item);
-            if (!todoRepository.existsById(Integer.parseInt(id)))
+            if (!todoRepository.existsById(obj.getId()))
                 return item;
         }
         return null;
@@ -43,22 +46,24 @@ public class TodoService {
         return false;
     }
 
-    public Todo updateSelection(String id, boolean done){
-        Optional<Todo> optionalTodo = todoRepository.findById(Integer.parseInt(id));
+    public Todo updateSelection(String body){
+        Todo obj = new Gson().fromJson(body, Todo.class);
+        Optional<Todo> optionalTodo = todoRepository.findById(obj.getId());
         if (optionalTodo.isPresent()) {
             Todo item = optionalTodo.get();
-            item.setDone(done);
+            item.setDone(obj.isDone());
             todoRepository.save(item);
             return item;
         }
         return null;
     }
 
-    public boolean updateTask(String id, String newTask){
-        Optional<Todo> optionalItem = todoRepository.findById(Integer.parseInt(id));
+    public boolean updateTask(String body){
+        Todo obj = new Gson().fromJson(body, Todo.class);
+        Optional<Todo> optionalItem = todoRepository.findById(obj.getId());
         if (optionalItem.isPresent()) {
             Todo item = optionalItem.get();
-            item.setTask(newTask);
+            item.setTask(obj.getTask());
             todoRepository.save(item);
             return true;
         }

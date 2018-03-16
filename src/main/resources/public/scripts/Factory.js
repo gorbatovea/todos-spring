@@ -50,8 +50,7 @@ function todoFactory(dist, id, value, done) {
     todo.getElementsByClassName('todos-list-item_check')[0]
         .addEventListener('click', function (clickEvent) {
             var item = clickEvent.target.closest('.todos-list-item');
-            request('GET',
-                API_SELECT + '?id=' + item.getAttribute('id') + '&done=' + clickEvent.target.checked,
+            request('POST', API_SELECT,
                 function (response) {
                     if (response === '') {
                         console.error('Response is empty');
@@ -72,18 +71,24 @@ function todoFactory(dist, id, value, done) {
                         }
                     }
                     filtrate();
-                }, TIMEOUT, null);
+                }, TIMEOUT, JSON.stringify({
+                    id: item.getAttribute('id'),
+                    task: null,
+                    done: clickEvent.target.checked
+                }));
         });
     todo.getElementsByClassName('todos-list-item_name')[0]
         .addEventListener('focusout', function (focusoutEvent) {
-            request('GET', API_UPDATE + '?id=' + focusoutEvent.target.closest('.todos-list-item').getAttribute('id')
-                + '&task=' + focusoutEvent.target.value, null, TIMEOUT, null);
+            request('POST', API_UPDATE, null, TIMEOUT, JSON.stringify({
+                id: focusoutEvent.target.closest('.todos-list-item').getAttribute('id'),
+                task: focusoutEvent.target.value,
+                done: null
+            }));
         });
     todo.getElementsByClassName('todos-list-item_delete')[0]
         .addEventListener('click', function (clickEvent) {
             var parent = clickEvent.target.closest('.todos-list-item');
-            request('GET', API_DELETE + '?id=' +
-                parent.getAttribute('id'),
+            request('POST', API_DELETE,
                 function (response) {
                     if (response === '') {
                         console.error('Response is empty');
@@ -91,6 +96,10 @@ function todoFactory(dist, id, value, done) {
                     }
                     dist.removeChild(document.getElementById(response.id));
                     updateCounter(-1);
-                }, TIMEOUT, null);
+                }, TIMEOUT, JSON.stringify({
+                    id: parent.getAttribute('id'),
+                    task: null,
+                    done: null
+                }));
         });
 }

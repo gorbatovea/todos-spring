@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
         function (clickEvent) {
             var items = todoList.children;
             for(var i = 0; i < items.length; i++) {
-                request('GET', API_SELECT +'?id=' + items[i].getAttribute('id') + '&done=true',
+                request('POST', API_SELECT,
                 function (response) {
                     if ((response !== null)) {
                         var item = document.getElementById(response.id);
@@ -21,7 +21,11 @@ document.addEventListener('DOMContentLoaded', function () {
                         item.getElementsByClassName('todos-list-item_name')[0].style.textDecoration = 'line-through';
                         item.getElementsByClassName('todos-list-item_name')[0].style.opacity = '0.5';
                     }
-                }, TIMEOUT, null);
+                }, TIMEOUT, JSON.stringify({
+                        id: items[i].getAttribute('id'),
+                        task: null,
+                        done: true
+                    }));
             }
         });
     //listener for 'input field'
@@ -29,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
         function(keyPressEvent){
         var addingKeyNumber = 13;
         if ((keyPressEvent.which === addingKeyNumber) && (inputField.value !== '')){
-            request('GET', API_ADD + '?task=' + inputField.value, function (response) {
+            request('POST', API_ADD, function (response) {
                 todoFactory(todoList, response.id, response.task, response.done);
                 updateCounter(1);
                 if (activeFilter === filters[2]){
@@ -38,7 +42,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     activeFilter.classList.add('__active');
                     filtrate();
                 }
-            }, TIMEOUT, null);
+            }, TIMEOUT, JSON.stringify({
+                id: null,
+                task: inputField.value,
+                done: null
+            }));
             inputField.value = '';
         }
     });
@@ -78,13 +86,17 @@ document.addEventListener('DOMContentLoaded', function () {
         function (clickEvent) {
         for(var i = 0; i < todoList.children.length; i++) {
             if (todoList.children[i].getAttribute('class') === 'todos-list-item __ready') {
-                request('GET', API_DELETE + '?id=' + todoList.children[i].getAttribute('id'),
+                request('POST', API_DELETE,
                     function (response) {
                         if (response !== '') {
                             todoList.removeChild(document.getElementById(response.id));
                             updateCounter(-1);
                         }
-                    }, TIMEOUT, null);
+                    }, TIMEOUT, JSON.stringify({
+                        id: todoList.children[i].getAttribute('id'),
+                        task: null,
+                        done: null
+                    }));
             }
         }
     });

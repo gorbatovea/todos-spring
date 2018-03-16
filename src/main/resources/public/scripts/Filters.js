@@ -2,7 +2,6 @@ function filtrate(){
     switch(activeFilter){
         case filters[0  ] : {
             for (var i = 0; i < todoList.children.length; i++) {
-                console.log('SHOW ALL');
                 todoList.children[i].style.display = 'flex';
             }
             break;
