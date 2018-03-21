@@ -3,9 +3,12 @@ package com.todos.todosspring.service;
 import com.google.gson.Gson;
 import com.todos.todosspring.model.Todo;
 import com.todos.todosspring.model.TodoRepository;
+import javafx.collections.transformation.SortedList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Optional;
 
 @Service
@@ -15,7 +18,20 @@ public class TodoService {
     TodoRepository todoRepository;
 
     public Iterable<Todo> getAll() {
-        return todoRepository.findAll();
+        ArrayList<Todo> list = new ArrayList<>();
+        for (Todo item:
+             todoRepository.findAll()) {
+            list.add(item);
+        }
+        list.sort(new Comparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                if (((Todo) o1).getId() > ((Todo) o2).getId()) return 1;
+                else if (((Todo) o1).getId() < ((Todo) o2).getId()) return -1;
+                else return 0;
+            }
+        });
+        return list;
     }
 
     public Todo addItem(String body) {
