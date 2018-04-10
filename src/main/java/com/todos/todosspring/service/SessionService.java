@@ -21,13 +21,9 @@ public class SessionService {
         if (userId == null) return null;
         else {
             String token = generateToken();
-            for (Session sesion:
+            for (Session session:
                  sessionRepository.findAll()) {
-                if (sesion.getUserId().equals(userId)) {
-                    sesion.setToken(token);
-                    sessionRepository.save(sesion);
-                    return token;
-                }
+                if (session.getUserId().equals(userId)) sessionRepository.delete(session);
             }
             sessionRepository.save(new Session(userId, token));
             return token;
