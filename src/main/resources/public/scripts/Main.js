@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 items[i].getElementsByClassName('todos-list-item_name')[0].style.opacity = '0.5';
                 request('POST', API_SELECT,
                 function (response) {
-                    if ((response === null)) {
+                    if ((response === '')) {
                         console.error('Response is empty');
                         return;
                     }
@@ -35,13 +35,16 @@ document.addEventListener('DOMContentLoaded', function () {
         var addingKeyNumber = 13;
         if ((keyPressEvent.which === addingKeyNumber) && (inputField.value !== '')){
             request('POST', API_ADD, function (response) {
-                todoFactory(todoList, response.id, response.task, response.done);
-                updateCounter(1);
-                if (activeFilter === filters[2]){
-                    activeFilter.classList.remove('__active');
-                    activeFilter = filters[1];
-                    activeFilter.classList.add('__active');
-                    filtrate();
+                var item = JSON.parse(response);
+                if (item.id !== undefined && item.task !== undefined && item.done !== undefined) {
+                    todoFactory(todoList, item.id, item.task, item.done);
+                    updateCounter(1);
+                    if (activeFilter === filters[2]) {
+                        activeFilter.classList.remove('__active');
+                        activeFilter = filters[1];
+                        activeFilter.classList.add('__active');
+                        filtrate();
+                    }
                 }
             }, TIMEOUT, JSON.stringify({
                 id: null,
@@ -53,8 +56,15 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     //fetching all stored items
     request('GET', API_GETALL, function (response) {
-        for(var i = 0; i < response.length; i++) {
-            todoFactory(todoList, response[i].id, response[i].task, response[i].done);
+        if (response === undefined) return;
+        var items = JSON.parse(response);
+        if (items === undefined) return;
+        for(var i = 0; i < items.length; i++) {
+            if (items[i].id !== undefined && items[i].task !== undefined && items[i].done !== undefined)
+                todoFactory(todoList, items[i].id, items[i].task, items[i].done);
+            else {
+                console.error('JSON parse error!')
+            }
             updateCounter(1);
         }
     }, TIMEOUT, null);

@@ -17,37 +17,35 @@ public class TodoService {
     @Autowired
     TodoRepository todoRepository;
 
-    public Iterable<Todo> getAll() {
+    public Iterable<Todo> getAll(String userId, String token) {
         ArrayList<Todo> list = new ArrayList<>();
         for (Todo item:
              todoRepository.findAll()) {
-            list.add(item);
+            if (item.getUserId().equals(userId)) list.add(item);
         }
-        list.sort(new Comparator() {
-            @Override
-            public int compare(Object o1, Object o2) {
-                if (((Todo) o1).getId() > ((Todo) o2).getId()) return 1;
-                else if (((Todo) o1).getId() < ((Todo) o2).getId()) return -1;
-                else return 0;
-            }
+        list.sort((Comparator) (o1, o2) -> {
+            if (((Todo) o1).getId() > ((Todo) o2).getId()) return 1;
+            else if (((Todo) o1).getId() < ((Todo) o2).getId()) return -1;
+            else return 0;
         });
         return list;
     }
 
-    public Todo addItem(String body) {
+    public Todo addItem(String userId, String body) {
         Todo obj = new Gson().fromJson(body, Todo.class);
-        Todo item = new Todo(obj.getTask(), false);
+        Todo item = new Todo(obj.getTask(), false, userId);
         todoRepository.save(item);
-        if (todoRepository.existsById((Integer)item.getId())) return item;
+        if (todoRepository.existsById(item.getId())) return item;
         return null;
     }
 
-    public Todo deleteItem (String body) {
+    public Todo deleteItem (String userId, String body) {
         Todo obj = new Gson().fromJson(body, Todo.class);
         Optional<Todo> optionalItem = todoRepository.findById(obj.getId());
         if (optionalItem.isPresent()) {
             Todo item = optionalItem.get();
-            todoRepository.delete(item);
+            if (item.getUserId().equals(userId)) todoRepository.delete(item);
+            else return null;
             if (!todoRepository.existsById(obj.getId()))
                 return item;
         }
@@ -62,24 +60,26 @@ public class TodoService {
         return false;
     }
 
-    public Todo updateSelection(String body){
+    public Todo updateSelection(String userId, String body){
         Todo obj = new Gson().fromJson(body, Todo.class);
         Optional<Todo> optionalTodo = todoRepository.findById(obj.getId());
         if (optionalTodo.isPresent()) {
             Todo item = optionalTodo.get();
-            item.setDone(obj.isDone());
+            if (item.getUserId().equals(userId)) item.setDone(obj.isDone());
+            else return null;
             todoRepository.save(item);
             return item;
         }
         return null;
     }
 
-    public boolean updateTask(String body){
+    public boolean updateTask(String userId, String body){
         Todo obj = new Gson().fromJson(body, Todo.class);
         Optional<Todo> optionalItem = todoRepository.findById(obj.getId());
         if (optionalItem.isPresent()) {
             Todo item = optionalItem.get();
-            item.setTask(obj.getTask());
+            if (item.getUserId().equals(userId)) item.setTask(obj.getTask());
+            else return false;
             todoRepository.save(item);
             return true;
         }

@@ -2,10 +2,10 @@
 
 @import "base.css";
 
-@import "project/todos-header-title.css";
-@import "project/todos-container.css";
-@import "project/todo-add.css";
-@import "project/todos-list.css";
-@import "project/todos-list-item.css";
-@import "project/todos-actionbar.css";
-@import "project/todos-empty.css";
+@import "todos/todos-header-title.css";
+@import "todos/todos-container.css";
+@import "todos/todo-add.css";
+@import "todos/todos-list.css";
+@import "todos/todos-list-item.css";
+@import "todos/todos-actionbar.css";
+@import "todos/todos-empty.css";

@@ -43,7 +43,7 @@
 
 
 .todos-list-item_check:checked ~ .todos-list-item_check-icon{
-    background: url(../../img/completed.png) 0 no-repeat;
+    background: url(../../../img/completed.png) 0 no-repeat;
     background-position: center;
     border: 1px solid rgb(150,215,203);
 }
@@ -83,7 +83,7 @@
     width: 44px;
     position: relative;
     float: right;
-    background: url("../../img/close.png") 0 no-repeat;
+    background: url("../../../img/close.png") 0 no-repeat;
     background-position: center;
     border: none;
     cursor: pointer;

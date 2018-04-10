@@ -1,0 +1,55 @@
+.todos-login-form {
+    margin: 0 auto;
+    margin-top: 10px;
+    width: 70%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+    background: white;
+}
+
+.todos-login-form ::placeholder {
+    opacity: 0.5;
+}
+
+.todos-login-form_log {
+    height: 64px;
+    width: 100%;
+    border: 0;
+    color: #666;
+    font-size: 24px;
+    display: block;
+    text-align: center;
+}
+
+.todos-login-form_pass {
+    height: 64px;
+    width: 100%;
+    border: 0;
+    color: #666;
+    font-size: 24px;
+    display: block;
+    text-align: center;
+}
+
+.todos-login-form_sub-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.todos-login-form_sub-target {
+    background: none;
+    width: 100%;
+    height: 64px;
+    display: block;
+    margin: 0 auto;
+    border: 0;
+    z-index: 1;
+}
+
+.todos-login-form_sub-icon {
+    background:url(../../img/select-all.png) 0 no-repeat ;
+    background-position: center;
+    transform: rotate(-90deg);
+    width: 64px;
+    height: 64px;
+    position: absolute;
+}

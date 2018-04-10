@@ -12,14 +12,16 @@ public class Todo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    private String userId;
     private  String task;
     private boolean done;
 
-    public Todo(){};
+    public Todo(){}
 
-    public Todo(String task, boolean done) {
+    public Todo(String task, boolean done, String userId) {
         this.task = task;
         this.done = done;
+        this.userId = userId;
     }
 
     public void setId(Integer id){
@@ -28,6 +30,14 @@ public class Todo {
 
     public Integer getId() {
         return id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getTask() {
