@@ -1,0 +1,50 @@
+.todos-registration-form {
+    margin: 0 auto;
+    margin-top: 10px;
+    width: 70%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+    background: white;
+}
+
+.todos-registration-form ::placeholder {
+    opacity: 0.5;
+}
+
+.todos-registration-form_username {
+    height: 64px;
+    width: 100%;
+    border: 0;
+    color: #666;
+    font-size: 24px;
+    display: block;
+    text-align: center;
+}
+
+.todos-registration-form_pass {
+    height: 64px;
+    width: 100%;
+    border: 0;
+    color: #666;
+    font-size: 24px;
+    display: block;
+    text-align: center;
+}
+
+.todos-registration-form_sub-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.todos-registration-form_sub-target {
+    background: none;
+    width: 100%;
+    height: 64px;
+    display: block;
+    margin: 0 auto;
+    border: 0;
+    color: #666;
+    font-size: 24px;
+    display: block;
+    text-align: center;
+    cursor: pointer;
+}

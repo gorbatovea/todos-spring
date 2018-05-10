@@ -11,6 +11,7 @@ public class Utils {
     final public static String LOGIN_PARAM = "login";
     final public static String PASSWORD_PARAM = "password";
     final public static String LOGIN_REDIRECT_PAGE = "login-redirect.html";
+    final public static String REGISTRATION_PAGE = "registration.html";
     
     public static Pair<String, String>[] parseFormUrlEncode(String src){
         if (src.length() > 0) {

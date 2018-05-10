@@ -1,0 +1,17 @@
+.todos-registration {
+    display: block;
+    width: 70%;
+    height: 64px;
+    margin: 10px auto 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+    background: white;
+    border: none;
+    text-decoration-color: rgba(175, 47, 47, .15);
+    font-size: 24px;
+    font-weight: 100;
+    color: #666;
+}
+
+.todos-registration_ref {
+    text-decoration: none;
+}

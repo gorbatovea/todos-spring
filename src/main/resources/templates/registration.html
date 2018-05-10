@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Registration</title>
+        <link rel="stylesheet" href="styles/default_registration.css">
+    </head>
+
+    <body>
+    <div class="todos-wrap">
+        <div class="todos-registration-header">
+            <h1 class="todos-registration-header-title">todos</h1>
+        </div>
+        <form class="todos-registration-form" action="/submit" method="post">
+            <input name="username" class="todos-registration-form_username" placeholder="username" aria-label="login" required>
+            <input name="password" class="todos-registration-form_pass" type="password" placeholder="your password" aria-label="password" required>
+            <input class="todos-registration-form_pass" type="password" placeholder="repeat password" aria-label="password" required>
+            <div class="todos-registration-form_sub-wrap">
+                <input class="todos-registration-form_sub-target" type="submit" value="submit" aria-label="submit">
+            </div>
+        </form>
+    </div>
+    </div>
+    <script>
+        var registrationForm,
+            passwordField,
+            retypedPasswordField;
+        document.addEventListener('DOMContentLoaded', function () {
+            registrationForm = document.getElementsByClassName('todos-registration-form')[0];
+            passwordField = document.getElementsByClassName('todos-registration-form_pass')[0];
+            retypedPasswordField = document.getElementsByClassName('todos-registration-form_pass')[1];
+            registrationForm.addEventListener('submit', function (event) {
+                if (passwordField.value !== retypedPasswordField.value)  {
+                    event.preventDefault();
+                }
+            });
+            retypedPasswordField.addEventListener('change', function () {
+                if (passwordField.value === retypedPasswordField.value) {
+                    retypedPasswordField.style.border = '0';
+                } else
+                    retypedPasswordField.style.border = '1px solid rgb(239, 166, 166)';
+                });
+        });
+    </script>
+    </body>
+</html>
